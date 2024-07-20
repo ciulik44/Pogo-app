@@ -12,11 +12,14 @@ import (
 const (
 	DB_USER     = "postgres"
 	DB_PASSWORD = "password"
-	DB_NAME     = "postgres-go"
+	DB_NAME     = "mydb"
+	DB_HOST     = "db"
+	DB_PORT     = "5432"
 )
 
 func main() {
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s sslmode=disable", DB_USER, DB_PASSWORD, DB_NAME)
+	dbinfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
+		DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME)
 	db, err := sql.Open("postgres", dbinfo)
 	if err != nil {
 		log.Fatal(err)
