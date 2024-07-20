@@ -1,23 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-postgres-go-app
-  labels:
-    app: {{ .Chart.Name }}
+  name: pogo
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}
+      app: pogo
   template:
     metadata:
       labels:
-        app: {{ .Chart.Name }}
+        app: pogo
     spec:
       containers:
-        - name: {{ .Chart.Name }}
+        - name: pogo
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 80
           env:
             - name: DB_USER
               valueFrom:
@@ -30,12 +29,8 @@ spec:
                   name: db-secret
                   key: POSTGRES_PASSWORD
             - name: DB_NAME
-              value: {{ .Values.env.DB_NAME }}
+              value: {{ .Values.postgres.db }}
             - name: DB_HOST
-              value: {{ include "postgres-go-app.postgresql.fullname" . }}
+              value: postgres
             - name: DB_PORT
-              value: {{ .Values.env.DB_PORT }}
-          ports:
-            - containerPort: 8080
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+              value: "5432"

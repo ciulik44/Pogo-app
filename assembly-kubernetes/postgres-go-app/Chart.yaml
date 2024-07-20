@@ -1,9 +1,0 @@
-apiVersion: v2
-name: postgres-go-app
-description: A Helm chart for deploying a Go application and PostgreSQL with PgAdmin
-version: 0.1.0
-appVersion: "1.0"
-dependencies:
-  - name: postgresql
-    version: 15.5.17
-    repository: "https://charts.bitnami.com/bitnami"

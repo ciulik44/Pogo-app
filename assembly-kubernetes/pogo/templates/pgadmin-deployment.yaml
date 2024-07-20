@@ -1,10 +1,7 @@
-{{- if .Values.pgadmin.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-pgadmin
-  labels:
-    app: pgadmin
+  name: pgadmin
 spec:
   replicas: 1
   selector:
@@ -17,7 +14,9 @@ spec:
     spec:
       containers:
         - name: pgadmin
-          image: "{{ .Values.pgadmin.image }}:{{ .Values.pgadmin.tag }}"
+          image: {{ .Values.pgadmin.image }}
+          ports:
+            - containerPort: {{ .Values.pgadmin.servicePort }}
           env:
             - name: PGADMIN_DEFAULT_EMAIL
               valueFrom:
@@ -29,8 +28,3 @@ spec:
                 secretKeyRef:
                   name: db-secret
                   key: PGADMIN_DEFAULT_PASSWORD
-          ports:
-            - containerPort: 80
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-{{- end }}
