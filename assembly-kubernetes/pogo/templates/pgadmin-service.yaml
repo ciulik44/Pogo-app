@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: pgadmin
 spec:
+  type: {{ .Values.pgadmin.serviceType }}
   selector:
     app: pgadmin
   ports:
