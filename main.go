@@ -12,7 +12,7 @@ import (
 const (
 	DB_USER     = "postgres"
 	DB_PASSWORD = "password"
-	DB_NAME     = "mydb"
+	DB_NAME     = "postgres-go"
 )
 
 func main() {
