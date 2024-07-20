@@ -1,11 +1,13 @@
 version: '3'
 services:
   db:
-    image: postgres:latest
+    container_name: postgres_container
+    image: postgres
+    restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: postgres-go
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: mydb
     ports:
       - "5432:5432"
     volumes:
@@ -24,4 +26,4 @@ services:
       - db
 
 volumes:
-    db-data:
+  db-data:
