@@ -1,0 +1,15 @@
+{{- if .Values.pgadmin.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-pgadmin
+  labels:
+    app: pgadmin
+spec:
+  type: {{ .Values.pgadmin.service.type }}
+  ports:
+    - port: {{ .Values.pgadmin.service.port }}
+      targetPort: 80
+  selector:
+    app: pgadmin
+{{- end }}
