@@ -1,4 +1,3 @@
-version: '3'
 services:
   db:
     container_name: postgres_container
@@ -10,6 +9,8 @@ services:
       POSTGRES_DB: mydb
     ports:
       - "5432:5432"
+    networks:
+      - assembly-docker_default
     volumes:
       - db-data:/var/lib/postgresql/data
 
@@ -20,6 +21,8 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@example.com
       PGADMIN_DEFAULT_PASSWORD: admin
+    networks:
+      - assembly-docker_default
     ports:
       - "80:80"
     depends_on:
@@ -27,15 +30,23 @@ services:
 
   goapp:
     container_name: pogo_main
-    image: ciulik/postgres-go-app:1.0
-    networks:
-      - assembly-docker_default
+    build:
+      context: ..
+      dockerfile: ./assembly-docker/Dockerfile
     environment:
       DB_USER: root
       DB_PASSWORD: root
       DB_NAME: mydb
       DB_HOST: postgres_container
       DB_PORT: 5432
+    depends_on:
+      - db
+    networks:
+      - assembly-docker_default
 
 volumes:
   db-data:
+
+networks:
+  assembly-docker_default:
+    external: false
