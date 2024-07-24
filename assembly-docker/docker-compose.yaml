@@ -25,5 +25,17 @@ services:
     depends_on:
       - db
 
+  goapp:
+    container_name: pogo_main
+    image: ciulik/postgres-go-app:1.0
+    networks:
+      - assembly-docker_default
+    environment:
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: mydb
+      DB_HOST: postgres_container
+      DB_PORT: 5432
+
 volumes:
   db-data:
