@@ -30,9 +30,7 @@ services:
 
   goapp:
     container_name: pogo_main
-    build:
-      context: ..
-      dockerfile: ./assembly-docker/Dockerfile
+    image: ciulik/postgres-go-app:1.0
     environment:
       DB_USER: root
       DB_PASSWORD: root
