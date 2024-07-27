@@ -1,0 +1,24 @@
+agent:
+  # -- Mode to run Grafana Agent in. Can be "flow" or "static".
+  mode: 'flow'
+  configMap:
+    # -- Create a new ConfigMap for the config file.
+    create: true
+    # -- Content to assign to the new ConfigMap.  This is passed into `tpl` allowing for templating from values.
+    content: |
+      
+      logging {
+        level  = "info"
+        format = "logfmt"
+      }
+
+      loki.source.kubernetes_events "events" {
+        log_format = "json"
+        forward_to = [loki.write.loki_endpoint.receiver]
+      }
+
+      loki.write "loki_endpoint" {
+        endpoint {
+          url = "http://loki.loki-stack:3100/loki/api/v1/push"
+        }
+      }
