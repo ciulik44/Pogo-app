@@ -16,7 +16,7 @@ spec:
         - name: pogo
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           ports:
-            - containerPort: 80
+            - containerPort: {{ .Values.image.servicePort }}
           env:
             - name: DB_USER
               valueFrom:

@@ -4,6 +4,7 @@ image:
   repository: ciulik/postgres-go-app
   tag: "1.0"
   pullPolicy: IfNotPresent
+  servicePort: 80
 
 service:
   type: ClusterIP
