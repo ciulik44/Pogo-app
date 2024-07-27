@@ -11,12 +11,15 @@ service:
 
 postgres:
   image: postgres:latest
-  host: postgres
+  user: root
+  password: root
   db: mydb
   servicePort: 5432
 
 pgadmin:
   image: dpage/pgadmin4:latest
+  email: admin@example.com
+  password: admin
   serviceType: LoadBalancer
   servicePort: 80
 

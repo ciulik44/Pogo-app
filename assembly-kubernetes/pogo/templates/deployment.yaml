@@ -31,6 +31,6 @@ spec:
             - name: DB_NAME
               value: {{ .Values.postgres.db }}
             - name: DB_HOST
-              value: {{ .Values.postgres.host }}
+              value: postgres
             - name: DB_PORT
-              value: {{ .Values.postgres.servicePort }}
+              value: "5432"
