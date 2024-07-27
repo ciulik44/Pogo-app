@@ -13,7 +13,7 @@ postgres:
   image: postgres:latest
   db: mydb
   host: postgres
-  servicePort: "5432"
+  servicePort: 5432
 
 pgadmin:
   image: dpage/pgadmin4:latest
