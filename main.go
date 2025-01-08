@@ -28,6 +28,8 @@ func main() {
 	err = db.Ping()
 	if err != nil {
 		log.Fatal(err)
+	} else {
+		log.Println("Successfully connected to the database")
 	}
 
 	// Sprawdzenie, czy tabela istnieje i utworzenie jej, jeśli nie istnieje
